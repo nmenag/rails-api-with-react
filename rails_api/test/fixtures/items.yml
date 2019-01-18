@@ -1,9 +1,20 @@
+# == Schema Information
+#
+# Table name: items
+#
+#  id         :integer          not null, primary key
+#  product_id :integer
+#  invoice_id :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  product: one
-  invoice: one
+item_1:
+  product: product_1
+  invoice: invoice_1
 
-two:
-  product: two
-  invoice: two
+item_2:
+  product: product_2
+  invoice: invoice_1

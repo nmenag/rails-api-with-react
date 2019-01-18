@@ -28,4 +28,10 @@ class ProductTest < ActiveSupport::TestCase
     refute product.valid?
     assert product.errors[:description].present?
   end
+
+  test 'invalid product with duplicate name' do
+    product = Product.new(name: 'Product 1', description: 'lorem ipsum')
+    refute product.valid?
+    assert product.errors[:name].present?
+  end
 end

@@ -31,13 +31,22 @@ class UserTest < ActiveSupport::TestCase
     assert user.errors[:email].present?
   end
 
+  test 'invalid with email duplicate' do
+    user = User.new(email: 'user_1@test.com',
+                    password_digest: BCrypt::Password.create('12345678', cost: 5),
+                    auth_token: 'xxyyyy'
+                  )
+    refute user.valid?
+    assert user.errors[:email].present?
+  end
+
   test 'valid roles' do
     assert_equal User.roles.keys, %w(user admin)
   end
 
   test '#invoices' do
     user = users(:user_1)
-    invoice = invoices(:invoice_1)
+    invoices(:invoice_1)
     assert_equal user.invoices.size, 2
   end
 end

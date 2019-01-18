@@ -19,7 +19,7 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   test 'invalid invoice without number' do
-    invoice = Invoice.new(invoice_date: Date.today)
+    invoice = Invoice.new(number: nil, invoice_date: Date.today)
     refute invoice.valid?
     assert invoice.errors[:number].present?
   end
@@ -28,12 +28,6 @@ class InvoiceTest < ActiveSupport::TestCase
     invoice = Invoice.new(number: 3)
     refute invoice.valid?
     assert invoice.errors[:invoice_date].present?
-  end
-
-  test '#user' do
-    invoice = invoices(:invoice_1)
-    user = users(:user_1)
-    assert invoice.user, user
   end
 
   test 'valid number unique with by user' do
@@ -54,5 +48,20 @@ class InvoiceTest < ActiveSupport::TestCase
     user_2 = users(:user_2)
     refute invoice_2.valid?
     assert invoice_2.errors[:number].present?
+  end
+
+  test '#user' do
+    invoice = invoices(:invoice_1)
+    user = users(:user_1)
+    assert invoice.user, user
+  end
+
+  test '#items' do
+    invoice = invoices(:invoice_1)
+    product_1 = products(:product_1)
+    product_2 = products(:product_2)
+    assert_equal invoice.items.size, 2
+    assert_equal invoice.items.first.product, product_2
+    assert_equal invoice.items.second.product, product_1
   end
 end

@@ -18,3 +18,7 @@
 product_1:
   name: Product 1
   description: lorem ipsum
+
+product_2:
+  name: Product 2
+  description: lorem ipsum

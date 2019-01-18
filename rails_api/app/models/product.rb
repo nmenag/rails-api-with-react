@@ -13,5 +13,5 @@ class Product < ApplicationRecord
   has_many :items
 
   validates :name, :description, presence: :true
-
+  validates :name, uniqueness: true
 end
