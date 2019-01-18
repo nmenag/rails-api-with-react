@@ -20,4 +20,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unauthorized
   end
+
+  test 'DELETE#destroy logs out user' do
+    user = users(:user_1)
+    previous_token = user.auth_token
+    delete sessions_url, xhr: true, headers: { 'HTTP_AUTHORIZATION': previous_token }
+
+    assert_not_equal previous_token, user.reload.auth_token
+  end
 end

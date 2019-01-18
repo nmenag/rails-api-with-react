@@ -26,4 +26,9 @@ class User < ApplicationRecord
     update!(auth_token: User.generate_unique_secure_token) if authorized
     authorized
   end
+
+  def sign_out
+    self.auth_token = User.generate_unique_secure_token
+    self.save
+  end
 end

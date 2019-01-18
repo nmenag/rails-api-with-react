@@ -11,6 +11,12 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    if current_user
+      current_user.sign_out
+      head 204
+    else
+      head :unauthorized
+    end
   end
 
   private
