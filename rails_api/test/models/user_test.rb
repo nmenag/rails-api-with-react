@@ -6,7 +6,7 @@
 #  email           :string           default(""), not null
 #  password_digest :string           not null
 #  auth_token      :string           default(""), not null
-#  role            :integer          default(0), not null
+#  role            :integer          default("user"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -32,6 +32,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'valid roles' do
-    assert_equal User.roles.keys, %w(user admin manager)
+    assert_equal User.roles.keys, %w(user admin)
+  end
+
+  test '#invoices' do
+    user = users(:user_1)
+    invoice = invoices(:invoice_1)
+    assert_equal user.invoices.size, 2
   end
 end

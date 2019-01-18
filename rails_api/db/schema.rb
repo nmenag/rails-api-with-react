@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2019_01_18_193801) do
 
   create_table "invoices", force: :cascade do |t|
-    t.integer "number", null: false
+    t.integer "number", default: 0, null: false
     t.date "invoice_date", null: false
     t.integer "user_id"
     t.datetime "created_at", null: false
