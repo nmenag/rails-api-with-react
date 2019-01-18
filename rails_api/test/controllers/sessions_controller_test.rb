@@ -25,7 +25,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     user = users(:user_1)
     previous_token = user.auth_token
     delete sessions_url, xhr: true, headers: { 'HTTP_AUTHORIZATION': previous_token }
-
     assert_not_equal previous_token, user.reload.auth_token
   end
 end
