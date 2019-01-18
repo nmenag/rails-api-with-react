@@ -14,7 +14,24 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'valid user' do
+    user = users(:user_1)
+    assert user.valid?
+  end
+
+  test 'invalid without password' do
+    user = User.new(email: "test.invalid@test.com")
+    refute user.valid?
+    assert user.errors[:password].present?
+  end
+
+  test 'invalid without email format valid' do
+    user = User.new(email: 'John')
+    refute user.valid?
+    assert user.errors[:email].present?
+  end
+
+  test 'valid roles' do
+    assert_equal User.roles.keys, %w(user admin manager)
+  end
 end
