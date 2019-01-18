@@ -12,6 +12,7 @@
 
 class Invoice < ApplicationRecord
   belongs_to :user
+  has_many :items
 
   validates :number, :invoice_date, presence: true
   validates :number, uniqueness: { scope: :user }
