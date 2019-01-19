@@ -11,5 +11,8 @@ Inside the rails folder (rails_api):
 3. `rails s`
 
 
+### Postman client
 
+ From the tests done in the rails api, the endpoints can be tested using the following Postman client:
 
+ [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1993584b02ee3199f2a1)
