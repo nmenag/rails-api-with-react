@@ -38,16 +38,35 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'POST#create creates a new invoice' do
+    product_1 = products(:product_1)
+    product_2 = products(:product_2)
     assert_difference 'Invoice.count', 1, 'Expected to create an invoice' do
       post invoices_url, xhr: true, as: :json, params: {
-          invoices: {  number: 4, invoice_date: Date.today }
-        }, headers: { 'HTTP_AUTHORIZATION': users(:user_1).auth_token }
+        invoices: {
+          number: 4, invoice_date: Date.today,
+          items_attributes: [
+            {
+              quantity: 1,
+              product_id: product_1.id
+            },
+            {
+              quantity: 1,
+              product_id: product_2.id
+            }
+          ]
+        }
+      }, headers: { 'HTTP_AUTHORIZATION': users(:user_1).auth_token }
     end
 
     assert_response :success
     body = JSON.parse(response.body)
-    assert_equal 4, body['number']
-    assert_equal Date.today.strftime, body['invoice_date']
+    assert_equal body['number'], 4
+    assert_equal  body['invoice_date'], Date.today.strftime
+
+    invoice = Invoice.last
+    assert_equal invoice.items.size, 2
+    assert_equal invoice.items.first.product, product_1
+    assert_equal invoice.items.second.product, product_2
   end
 
   test 'POST#create without credentials returns 401 Unauthorized' do

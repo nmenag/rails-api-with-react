@@ -18,4 +18,6 @@ class Invoice < ApplicationRecord
   validates :number, uniqueness: { scope: :user }
 
   scope :order_by_date, -> { order(invoice_date: :desc) }
+
+  accepts_nested_attributes_for :items, allow_destroy: true
 end

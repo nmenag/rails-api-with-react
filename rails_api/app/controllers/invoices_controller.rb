@@ -44,7 +44,7 @@ class InvoicesController < ApplicationController
 
   def invoices_params
     params.require(:invoices).permit(:number, :invoice_date,
-      { items: [:product_id, :quantity] }
+      items_attributes: [:id, :product_id, :quantity ]
     )
   end
 
