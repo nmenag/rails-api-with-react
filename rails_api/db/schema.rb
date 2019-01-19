@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_211428) do
   end
 
   create_table "items", force: :cascade do |t|
+    t.integer "quantity", default: 0, null: false
     t.integer "product_id"
     t.integer "invoice_id"
     t.datetime "created_at", null: false

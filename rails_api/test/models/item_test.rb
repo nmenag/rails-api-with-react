@@ -3,6 +3,7 @@
 # Table name: items
 #
 #  id         :integer          not null, primary key
+#  quantity   :integer          default(0), not null
 #  product_id :integer
 #  invoice_id :integer
 #  created_at :datetime         not null
