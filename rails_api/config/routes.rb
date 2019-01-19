@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   # Auth routes
   resources :registrations, only: [:create, :update]
+
   resources :sessions, only: [:create] do
     delete :destroy, on: :collection
   end
+
+  resources :invoices
 end

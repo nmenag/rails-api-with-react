@@ -16,4 +16,6 @@ class Invoice < ApplicationRecord
 
   validates :number, :invoice_date, presence: true
   validates :number, uniqueness: { scope: :user }
+
+  scope :order_by_date, -> { order(invoice_date: :desc) }
 end
