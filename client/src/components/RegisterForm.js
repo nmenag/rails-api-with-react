@@ -1,23 +1,24 @@
 import React from 'react';
 import {Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
+// import { UserRequest } from './helpers/userRequests'
 
-
-const LoginForm = () => {
+const RegisterForm = () => {
   return (
     <div class= 'container-form'>
       <div class='col-md-6 col-centered h-100'>
         <Card>
-          <CardHeader>Sign In</CardHeader>
+          <CardHeader>Sign Up</CardHeader>
           <CardBody>
         <CardText>
           <Form className="form">
             <Col>
               <FormGroup>
+                <Label>Email</Label>
                 <Input
                   type="email"
                   name="email"
-                  id="Email"
+                  id="exampleEmail"
                   placeholder="example@email.com"
                 />
               </FormGroup>
@@ -32,7 +33,18 @@ const LoginForm = () => {
                 />
               </FormGroup>
             </Col>
-            <Button>Enter</Button>
+
+            <Col>
+              <FormGroup>
+                <Input
+                  type="password"
+                  name="password"
+                  id="confirmPassword"
+                  placeholder=" Confirmation Password"
+                />
+              </FormGroup>
+            </Col>
+            <Button>Register</Button>
           </Form>
         </CardText>
       </CardBody>
@@ -42,4 +54,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm
+export default RegisterForm
