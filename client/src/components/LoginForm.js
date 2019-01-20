@@ -1,33 +1,45 @@
 import React from 'react';
-import { Alert } from 'reactstrap';
+import {Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
+
 
 const LoginForm = () => {
   return (
-    <div>
-      <Alert color="primary">
-        This is a primary alert — check it out!
-      </Alert>
-      <Alert color="secondary">
-        This is a secondary alert — check it out!
-      </Alert>
-      <Alert color="success">
-        This is a success alert — check it out!
-      </Alert>
-      <Alert color="danger">
-        This is a danger alert — check it out!
-      </Alert>
-      <Alert color="warning">
-        This is a warning alert — check it out!
-      </Alert>
-      <Alert color="info">
-        This is a info alert — check it out!
-      </Alert>
-      <Alert color="light">
-        This is a light alert — check it out!
-      </Alert>
-      <Alert color="dark">
-        This is a dark alert — check it out!
-      </Alert>
+    <div class= 'container-form'>
+      <div class='col-md-6 col-centered h-100'>
+        <Card>
+          <CardHeader>Sign In</CardHeader>
+          <CardBody>
+        <CardText>
+          <Form className="form">
+            <Col>
+              <FormGroup>
+                <Label>Email</Label>
+                <Input
+                  type="email"
+                  name="email"
+                  id="exampleEmail"
+                  placeholder="myemail@email.com"
+                />
+              </FormGroup>
+            </Col>
+            <Col>
+              <FormGroup>
+                <Label for="examplePassword">Password</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  id="examplePassword"
+                  placeholder="Password"
+                />
+              </FormGroup>
+            </Col>
+            <Button>Enter</Button>
+          </Form>
+        </CardText>
+      </CardBody>
+        </Card>
+      </div>
     </div>
   );
 };
