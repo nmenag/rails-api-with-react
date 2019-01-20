@@ -13,11 +13,20 @@ class LoginForm extends Component {
     this.state = {
       email: '',
       password: '',
+      sessionReferrer: false,
+      redirectToReferrer: false,
       errors: []
     }
     this.updateEmail = this.updateEmail.bind(this)
     this.updatePassword = this.updatePassword.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+
+  componentWillMount(e) {
+    if (cookies.load('userAuthToken')) {
+      this.setState({ sessionReferrer: true })
+    }
   }
 
   updateEmail(e) {
@@ -46,6 +55,11 @@ class LoginForm extends Component {
   }
 
   render () {
+    const sessionReferrer = this.state.sessionReferrer;
+    if (sessionReferrer === true) {
+      return <Redirect to="/invoices" />
+    }
+
     const redirectToReferrer = this.state.redirectToReferrer;
     if (redirectToReferrer === true) {
       return <Redirect to="/invoices" />

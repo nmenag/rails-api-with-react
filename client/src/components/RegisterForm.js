@@ -3,7 +3,7 @@ import {Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
 import { Redirect } from 'react-router-dom'
 import { userRequest } from '../helpers/usersRequestHelper';
-// import cookies from 'react-cookies'
+import cookies from 'react-cookies'
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -12,6 +12,8 @@ class RegisterForm extends Component {
       email: '',
       password: '',
       passwordConfirm: '',
+      sessionReferrer: false,
+      redirectToReferrer: false,
       errors: []
     }
 
@@ -21,11 +23,11 @@ class RegisterForm extends Component {
     this.updatePasswordConfirm = this.updatePasswordConfirm.bind(this)
   }
 
-  // componentWillMount() {
-  //   if (cookies.load('userAuthToken')) {
-  //     BrowserRouter.push('/invoices')
-  //   }
-  // }
+  componentWillMount(e) {
+    if (cookies.load('userAuthToken')) {
+      this.setState({ sessionReferrer: true })
+    }
+  }
 
   updateEmail(e) {
     this.setState({ email: e.target.value })
@@ -54,6 +56,12 @@ class RegisterForm extends Component {
   }
 
   render() {
+
+    const sessionReferrer = this.state.sessionReferrer;
+    if (sessionReferrer === true) {
+      return <Redirect to="/invoices" />
+    }
+
     const redirectToReferrer = this.state.redirectToReferrer;
     if (redirectToReferrer === true) {
       return <Redirect to="/sign_in" />
