@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Redirect } from 'react-router-dom'
 import { userRequest } from '../helpers/usersRequestHelper';
 import cookies from 'react-cookies'
 
@@ -46,14 +46,19 @@ class RegisterForm extends Component {
     const passwordConfirm = this.state.passwordConfirm
     userRequest.register(userEmail, password, passwordConfirm)
     .then((response) => {
-      BrowserRouter.push('/login')
+      this.setState({ redirectToReferrer: true })
     }).catch((error) => {
       console.log(error);
-      this.setState({ errors:  error })
+      this.setState({ errors:  error.response.data.errors })
     })
   }
 
   render() {
+    const redirectToReferrer = this.state.redirectToReferrer;
+    if (redirectToReferrer === true) {
+      return <Redirect to="/sign_in" />
+    }
+
     return (
       <div class= 'container-form'>
         <div class='col-md-6 col-centered h-100'>
@@ -61,7 +66,7 @@ class RegisterForm extends Component {
             <CardHeader>Sign Up</CardHeader>
             <CardBody>
           <CardText>
-            <Form className="form" onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit}>
               <Col>
                 <FormGroup>
                   <Input
@@ -82,7 +87,7 @@ class RegisterForm extends Component {
                     name="password"
                     id="Password"
                     placeholder="Password"
-                    required="true"
+                    required='true'
                     value={this.state.password}
                     onChange={this.updatePassword}
                   />

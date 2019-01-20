@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import {Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
 
 
@@ -11,7 +11,7 @@ const LoginForm = () => {
           <CardHeader>Sign In</CardHeader>
           <CardBody>
         <CardText>
-          <Form className="form">
+          <Form>
             <Col>
               <FormGroup>
                 <Input
