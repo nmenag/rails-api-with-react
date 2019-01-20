@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
-import { BrowserRouter, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { userRequest } from '../helpers/usersRequestHelper';
-import cookies from 'react-cookies'
+// import cookies from 'react-cookies'
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -21,11 +21,11 @@ class RegisterForm extends Component {
     this.updatePasswordConfirm = this.updatePasswordConfirm.bind(this)
   }
 
-  componentWillMount() {
-    if (cookies.load('userAuthToken')) {
-      BrowserRouter.push('/invoices')
-    }
-  }
+  // componentWillMount() {
+  //   if (cookies.load('userAuthToken')) {
+  //     BrowserRouter.push('/invoices')
+  //   }
+  // }
 
   updateEmail(e) {
     this.setState({ email: e.target.value })

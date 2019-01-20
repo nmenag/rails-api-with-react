@@ -16,6 +16,19 @@ const userRequest = {
         password_confirmation: passwordConfirm
       }
     })
+  },
+  signIn: (email, password) => {
+    return axios.post('/sessions', {
+      session: {
+        email: email,
+        password: password
+      }
+    }).then((response) => {
+      const user = response.data
+      cookies.save('userAuthToken', user.auth_token, { path: '/' })
+      axios.defaults.headers.common['Authorization'] = user.auth_token
+      return response
+    })
   }
 }
 
