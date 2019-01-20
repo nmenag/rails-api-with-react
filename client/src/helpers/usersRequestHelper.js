@@ -16,32 +16,6 @@ const userRequest = {
         password_confirmation: passwordConfirm
       }
     })
-  },
-
-  updateInfo: (id, caloriesGoal) => {
-    return axios.put(`/registrations/${id}`, {
-      user: {
-        daily_calories_goal: caloriesGoal
-      }
-    })
-  },
-
-  login: (email, password) => {
-    return axios.post('/sessions', {
-      session: {
-        email: email,
-        password: password
-      }
-    }).then((response) => {
-      const user = response.data
-      cookies.save('userAuthToken', user.auth_token, { path: '/' })
-      axios.defaults.headers.common['Authorization'] = user.auth_token
-      return response
-    })
-  },
-
-  logout: () => {
-    return axios.delete('/sessions')
   }
 }
 

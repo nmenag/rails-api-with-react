@@ -14,9 +14,11 @@ class RegisterForm extends Component {
       passwordConfirm: '',
       errors: []
     }
+
     this.handleSubmit = this.handleSubmit.bind(this)
     this.updateEmail = this.updateEmail.bind(this)
     this.updatePassword = this.updatePassword.bind(this)
+    this.updatePasswordConfirm = this.updatePasswordConfirm.bind(this)
   }
 
   componentWillMount() {
@@ -33,6 +35,10 @@ class RegisterForm extends Component {
     this.setState({ password: e.target.value })
   }
 
+  updatePasswordConfirm(e) {
+    this.setState({ passwordConfirm: e.target.value })
+  }
+
   handleSubmit(event) {
     event.preventDefault()
     const userEmail = this.state.email
@@ -42,7 +48,8 @@ class RegisterForm extends Component {
     .then((response) => {
       BrowserRouter.push('/login')
     }).catch((error) => {
-      this.setState({ errors: error.response.data.errors })
+      console.log(error);
+      this.setState({ errors:  error })
     })
   }
 
@@ -54,7 +61,7 @@ class RegisterForm extends Component {
             <CardHeader>Sign Up</CardHeader>
             <CardBody>
           <CardText>
-            <Form className="form">
+            <Form className="form" onSubmit={this.handleSubmit}>
               <Col>
                 <FormGroup>
                   <Input
@@ -62,6 +69,9 @@ class RegisterForm extends Component {
                     name="email"
                     id="exampleEmail"
                     placeholder="example@email.com"
+                    required="true"
+                    value={this.state.email}
+                    onChange={this.updateEmail}
                   />
                 </FormGroup>
               </Col>
@@ -72,6 +82,9 @@ class RegisterForm extends Component {
                     name="password"
                     id="Password"
                     placeholder="Password"
+                    required="true"
+                    value={this.state.password}
+                    onChange={this.updatePassword}
                   />
                 </FormGroup>
               </Col>
@@ -80,9 +93,12 @@ class RegisterForm extends Component {
                 <FormGroup>
                   <Input
                     type="password"
-                    name="password"
+                    name="ConfirmPassword"
                     id="confirmPassword"
                     placeholder=" Confirmation Password"
+                    required="true"
+                    value={this.state.passwordConfirm}
+                    onChange={this.updatePasswordConfirm}
                   />
                 </FormGroup>
               </Col>
