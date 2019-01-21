@@ -11,9 +11,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <UserNav />
         <Router>
           <div>
+            <Route component={UserNav} />
             <Route exact path="/" component={RegisterForm} />
             <Route path="/sign_in" component={LoginForm} />
             <Route path="/invoices" component={InvoiceIndex} />

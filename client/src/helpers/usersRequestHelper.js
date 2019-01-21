@@ -29,6 +29,9 @@ const userRequest = {
       axios.defaults.headers.common['Authorization'] = user.auth_token
       return response
     })
+  },
+  logout: () => {
+    return axios.delete('/sessions')
   }
 }
 

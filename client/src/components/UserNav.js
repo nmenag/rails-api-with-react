@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
 import {Navbar, NavbarBrand, Collapse, Nav, NavItem, NavLink, NavbarToggler } from 'reactstrap';
 import cookies from 'react-cookies';
+import { userRequest } from '../helpers/usersRequestHelper';
 
 class UserNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userEmail: ''
+      userEmail: '',
+      redirectToReferrer: true
     }
-    // this.handleLogout = this.handleLogout.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+  }
+
+  handleLogout(e) {
+    e.preventDefault()
+    userRequest.logout()
+    .then((response) => {
+      cookies.remove('userId')
+      cookies.remove('userEmail')
+      cookies.remove('userAuthToken')
+      cookies.remove('userRole')
+      this.props.history.push("/sign_in");
+    })
   }
 
   componentDidMount() {
     this.setState({userEmail: cookies.load('userEmail')})
   }
-
 
   render () {
     return (
@@ -28,7 +41,7 @@ class UserNav extends Component {
                 <NavLink>{this.state.userEmail}</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink>Logout</NavLink>
+                <NavLink onClick={this.handleLogout}>Logout</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

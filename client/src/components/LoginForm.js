@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
-import { Redirect } from 'react-router-dom'
 import { userRequest } from '../helpers/usersRequestHelper';
 import cookies from 'react-cookies';
 
@@ -26,6 +25,7 @@ class LoginForm extends Component {
   componentWillMount(e) {
     if (cookies.load('userAuthToken')) {
       this.setState({ sessionReferrer: true })
+      this.props.history.push("/invoices");
     }
   }
 
@@ -47,7 +47,7 @@ class LoginForm extends Component {
       cookies.save('userId', user.id, { path: '/' })
       cookies.save('userEmail', user.email, { path: '/' })
       cookies.save('userRole', user.role, { path: '/' })
-      this.setState({ redirectToReferrer: true })
+      this.props.history.push("/invoices");
     })
     .catch((error) => {
       this.setState({ errors: error.response.data.errors })
@@ -55,16 +55,6 @@ class LoginForm extends Component {
   }
 
   render () {
-    const sessionReferrer = this.state.sessionReferrer;
-    if (sessionReferrer === true) {
-      return <Redirect to="/invoices" />
-    }
-
-    const redirectToReferrer = this.state.redirectToReferrer;
-    if (redirectToReferrer === true) {
-      return <Redirect to="/invoices" />
-    }
-
     return (
       <div class= 'container-form'>
         <div class='col-md-6 col-centered h-100'>

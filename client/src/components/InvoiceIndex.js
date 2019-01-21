@@ -21,6 +21,7 @@ class InvoiceIndex extends Component {
   componentDidMount() {
     invoiceRequest.getInvoices()
     .then((response) => {
+      this.setState({userEmail: cookies.load('userEmail')})
       this.setState({ invoices: response.data })
     }).catch((error) => {
       if (error.response && error.response.status === 401) {
@@ -28,7 +29,6 @@ class InvoiceIndex extends Component {
         cookies.remove('userEmail')
         cookies.remove('userAuthToken')
         cookies.remove('userRole')
-        cookies.remove('userCaloriesGoal')
         this.setState({ sessionReferrer: false })
       }
     })
