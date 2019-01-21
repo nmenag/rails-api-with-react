@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Table} from 'reactstrap';
-// import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { invoiceRequest } from '../helpers/invoicesRequestHelper';
 import cookies from 'react-cookies';
 
@@ -14,7 +14,7 @@ class InvoiceIndex extends Component {
       createdAt:'',
       updateAt: '',
       items: '',
-      redirectToReferrer: false
+      sessionReferrer: true
     }
   }
 
@@ -29,16 +29,21 @@ class InvoiceIndex extends Component {
         cookies.remove('userAuthToken')
         cookies.remove('userRole')
         cookies.remove('userCaloriesGoal')
-        this.setState({ redirectToReferrer: true })
+        this.setState({ sessionReferrer: false })
       }
     })
   }
 
   render () {
 
+    const sessionReferrer = this.state.sessionReferrer;
+    if (sessionReferrer === false) {
+      return <Redirect to="/sign_in" />
+    }
+
     var records = this.state.invoices.map(function(record, index){
       return  <tr >
-                <td>{index}</td>
+                <td>{index + 1}</td>
                 <td>{record.number}</td>
                 <td>{record.invoice_date}</td>
                 <td>{record.created_at}</td>
