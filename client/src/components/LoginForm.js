@@ -4,6 +4,7 @@ import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
 import { Link } from 'react-router-dom'
 import { userRequest } from '../helpers/usersRequestHelper';
 import cookies from 'react-cookies';
+import AlertDismissable from './AlertDismissable';
 
 
 class LoginForm extends Component {
@@ -56,11 +57,16 @@ class LoginForm extends Component {
   }
 
   render () {
+    const alerts = this.state.errors.map(
+      (message, index) =>
+      <AlertDismissable key={index} message={message}/>
+    )
     return (
       <div class= 'container-form'>
         <div class='col-md-6 col-centered h-100'>
           <Card>
             <CardHeader>Sign In</CardHeader>
+            {alerts}
             <CardBody>
           <CardText>
             <Form onSubmit={this.handleSubmit}>
