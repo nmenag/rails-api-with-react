@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
+import { Link } from 'react-router-dom'
 import { userRequest } from '../helpers/usersRequestHelper';
 import cookies from 'react-cookies'
 
@@ -105,6 +106,7 @@ class RegisterForm extends Component {
               </Col>
               <Button>Register</Button>
             </Form>
+            Don't have an account? <Link to="/sign_in">Sign in</Link>
           </CardText>
         </CardBody>
           </Card>

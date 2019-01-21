@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import { Card, CardText, CardBody, CardHeader } from 'reactstrap';
+import { Link } from 'react-router-dom'
 import { userRequest } from '../helpers/usersRequestHelper';
 import cookies from 'react-cookies';
 
@@ -91,6 +92,7 @@ class LoginForm extends Component {
               </Col>
               <Button>Enter</Button>
             </Form>
+            Don't have an account? <Link to="/">Register</Link>
           </CardText>
         </CardBody>
           </Card>
