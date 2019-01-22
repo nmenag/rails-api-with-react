@@ -77,7 +77,7 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unauthorized
   end
 
-  test 'PUT#update updates calories entry' do
+  test 'PUT#update update  an invoice' do
     invoice = invoices(:invoice_1)
     user = invoice.user
     put invoice_url(invoice), xhr: true, as: :json, params: {
